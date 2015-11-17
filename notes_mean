@@ -1,0 +1,35 @@
+#MONGODB
+#nowe MongoDB po rozpakowaniu ma już gotowy bin, trzeba dodać do ścieżki
+#w ten sposób zainstalujemy najwięcej pakietów, więcej niż z mongodb*
+sudo dnf install mongo*
+#tworzymy i uprawniamy domyślny dla mongo folder do przechowywania plików
+sudo mkdir -p /data/db
+sudo chown -R gulci /data/db
+#uruchamiamy usługę, która nasłuchuje na porcie 27017
+mongod
+#wchodzimy do shella i sprawdzamy bazę testową - test
+mongo
+#tworzymy nową kolekcję artykułów i wkładamy tam obiekt JSON, który zawiera właściwość title
+db.articles.insert({title: "Hello World"})
+db.articles.find()
+
+#NODE.JS
+#wersja 0.10.36
+sudo dnf install nodejs
+#ewentualnie dla rozpakowanej wersji
+./configure && make && sudo make install
+#w wersji 5 mamy już gotowy bin, trzeba dodać do ścieżki
+node
+console.log("Node is up and running!");
+node application.js
+
+#NPM
+#lokalizacja globalnych pakietów
+#/usr/local/lib/node_modules
+sudo dnf install npm
+sudo npm install -g <Package Unique Name>@<Package Version>
+#instalujemy express lokalnie
+npm install express
+#zależności są instalowane w node_modules/express/node_modules
+#node_modules można dodać do .gitignore i potem spreparować listę modułów do instalacji - może bower?
+-->removing(23)
