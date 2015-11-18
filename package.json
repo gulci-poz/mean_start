@@ -1,9 +1,11 @@
 {
   "name": "MEAN",
   "version": "0.0.1",
+  "readme": "README.md",
   "dependencies": {
     "express": "~4.13.3",
-    "angular": "~1.4.7"
+    "angular": "~1.4.7",
+    "connect": "~3.4.0"
   },
   "description": "My first MEAN application",
   "main": "server.js",
