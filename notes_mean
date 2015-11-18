@@ -1,4 +1,23 @@
+#TAR
+#.tar.gz (też .tgz):
+#z - filtrowanie grzez gzip (kompresja i extract)
+#v - verbose
+#x - extract
+#f - podaj plik
+#c - create archive
+#czf - create-ze-file
+#xzf - extract-ze-file
+#t - wyświetl zawartość
+#r - bezwarunkowe dołączanie plików do archiwum
+#u - dołączanie do archiwum tylko nowszych odpowiedników
+#j - użycie bzip2
+#Z - użycie compress
+#J - użycie xz
+#--lzma - użycie lzma
+#.tar.bz2 (bzip2), .tar.Z (compress), .tar.lzma
+
 #MONGODB
+#skompresowane pliki tar są nazywane tarball
 #nowe MongoDB po rozpakowaniu ma już gotowy bin, trzeba dodać do ścieżki
 #w ten sposób zainstalujemy najwięcej pakietów, więcej niż z mongodb*
 sudo dnf install mongo*
@@ -29,7 +48,22 @@ node application.js
 sudo dnf install npm
 sudo npm install -g <Package Unique Name>@<Package Version>
 #instalujemy express lokalnie
-npm install express
+npm install express --save
 #zależności są instalowane w node_modules/express/node_modules
 #node_modules można dodać do .gitignore i potem spreparować listę modułów do instalacji - może bower?
--->removing(23)
+#{} - minimum pustego pliku package.json, będą warningi
+#--save - dodaje pakiet do sekcji dependencji package.json
+#~ w package.json - będzie robił update wersji minor
+#^ w package.json - będzie robił update wersji major
+npm install angular@1.4.7 --save
+npm uninstall <Package Unique Name>
+sudo npm uninstall -g <Package Unique Name>
+#robi update nawet jeśli nie mamy tego pakietu, po prostu go ściągnie
+npm update <Package Unique Name>
+sudo npm update -g <Package Unique Name>
+#w packages.json wersja może być "latest"
+npm init
+npm help json
+#z poziomu root projektu - instaluje zależności z package.json, lepiej użyć update, będziemy mieli update i instalację nieistniejących pakietów
+npm install
+npm update

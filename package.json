@@ -1,0 +1,28 @@
+{
+  "name": "MEAN",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "~4.13.3",
+    "angular": "~1.4.7"
+  },
+  "description": "My first MEAN application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gulci-poz/mean_start"
+  },
+  "keywords": [
+    "MongoDB",
+    "Express",
+    "AngularJS",
+    "Node.js"
+  ],
+  "author": "Sebastian Gulczyński",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/gulci-poz/mean_start/issues"
+  }
+}
