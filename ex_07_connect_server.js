@@ -12,12 +12,10 @@ var logger = function(req, res, next) {
     next();
 };
 
-/*
 var appIndexPage = function(req, res, next) {
     res.setHeader('Content Type', 'text/plain');
     res.end('Main Page');
 };
-*/
 
 var helloWorld = function(req, res, next) {
     res.setHeader('Content Type', 'text/plain');
@@ -34,16 +32,13 @@ var goodbyeWorld = function(req, res, next) {
 //ustalamy montowanie middleware czyli robimy routing
 
 app.use(logger);
-
-//żądanie na bazową ścieżkę, bez tego w przeglądarce nic byśmy nie dostali, bo byłyby tylko kaskady na konkretne ścieżki (chyba, że to byłaby jedyna)
-
-//blokuje pozostałe ścieżki, bez '/' również blokuje
-//app.use('/', appIndexPage);
-
+//dostaniemy dwie różne kaskady Connect
 app.use('/hello', helloWorld);
-
-//tu mamy inne żądanie, a więc inną kaskadę Connect
 app.use('/goodbye', goodbyeWorld);
+//żądanie na bazową ścieżkę, bez tego w przeglądarce nic byśmy nie dostali, bo byłyby tylko kaskady na konkretne ścieżki (chyba, że to byłaby jedyna)
+//w przypadku gdy obsługujemy inne ścieżki, routing na główną ścieżkę musimy dać na końcu, inaczej wszystkie żądania pójdą na główną ścieżkę
+app.use('/', appIndexPage);
+
 app.listen(3000);
 
 console.log('Server running at http://localhost:3000/');

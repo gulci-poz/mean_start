@@ -15,10 +15,11 @@
 #J - użycie xz
 #--lzma - użycie lzma
 #.tar.bz2 (bzip2), .tar.Z (compress), .tar.lzma
+#skompresowane pliki tar są nazywane tarball
+#-C <path> - wypakowanie do podanej ścieżki
 
 #MONGODB
-#skompresowane pliki tar są nazywane tarball
-#nowe MongoDB po rozpakowaniu ma już gotowy bin, trzeba dodać do ścieżki
+#MongoDB 3.0.7 - zawartość folderów do /usr/<foldery>
 #w ten sposób zainstalujemy najwięcej pakietów, więcej niż z mongodb*
 sudo dnf install mongo*
 #tworzymy i uprawniamy domyślny dla mongo folder do przechowywania plików
@@ -35,9 +36,7 @@ db.articles.find()
 #NODE.JS
 #wersja 0.10.36
 sudo dnf install nodejs
-#ewentualnie dla rozpakowanej wersji
-./configure && make && sudo make install
-#w wersji 5 mamy już gotowy bin, trzeba dodać do ścieżki
+#node.js 4.2.2 (zawiera npm 2.14.7) - zawartość folderów do /usr/<foldery>
 node
 console.log("Node is up and running!");
 node application.js
@@ -45,6 +44,7 @@ node application.js
 #NPM
 #lokalizacja globalnych pakietów
 #/usr/local/lib/node_modules
+#/usr/local to miejsce na twory użytkownika
 sudo dnf install npm
 sudo npm install -g <Package Unique Name>@<Package Version>
 #instalujemy express lokalnie
