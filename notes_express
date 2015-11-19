@@ -89,8 +89,8 @@ podział folderów ze względu na rolę funkcjonalną, a nie ze względu na impl
 app - logika aplikacji express
     models
     views
-    controllers
-    routes - middleware
+    controllers - middleware
+    routes - montowanie middleware
 config - pliki konfiguracyjne aplikacji express, przy większej ilości modułów każdy będzie miał swoją konfigurację w osobnym pliku js
     env - pliki konfiguracyjne środowiska apikacji express
     config.js - konfiguracja aplikacji express
@@ -153,3 +153,10 @@ package.json
 
 nazywanie plików: feature_name, execution destination, role,
 np. feature.client.controller.js i feature.server.controller.js
+
+app.render() - renderujemy widok, przekazujemy HTML do callback; jeśli nie potrzebujemy HTML jako response, a np. chcemy wysłać HTML email
+res.render() - renderujemy widok lokalnie, wysyłamy HTML jako response; bardziej powszechny
+
+kontroler żąda/otrzymuje dane z modelu
+kontroler żąda/otrzymuje szablon z widoku
+kontroler uruchamia res.render()

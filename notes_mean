@@ -67,3 +67,4 @@ npm help json
 #z poziomu root projektu - instaluje zależności z package.json, lepiej użyć update, będziemy mieli update i instalację nieistniejących pakietów
 npm install
 npm update
+npm list
