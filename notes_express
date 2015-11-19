@@ -1,0 +1,155 @@
+send() ustala Content-Type na podstawie typu obiektu response
+bufor - application/octet-stream
+string - text/html
+jeśli jest prosty tekst bez tagów, to też jest html
+obiekt lub tablica - application/json
+
+app.set(name, value)
+ustawia zmienne środowiskowe, które express wykorzysta w swojej konfiguracji
+
+app.get(name)
+pobiera zmienne środowiskowe, z których korzysta express
+
+app.endgine(ext, callback)
+zobligowanie danego silnika szablonów do użycia wskazanego formatu jako szablonu do renderowania stron; tutaj mamy ejs i html
+app.engine('html', require('ejs').renderFile)
+
+app.locals - wykorzystywane do wysyłania zmiennych aplikacji do wszystkich renderowanych szablonów
+
+app.use([path], callback)
+middleware do obsługi żądania HTTP, możliwy jest też mount - jak w Connect
+
+app.VERB(path, [callback...], callback)
+jedna lub więcej funkcji middleware powiązanych ze ścieżką, z żądaniem HTTP wysłanym daną funkcją, np. GET lub POST
+mamy wtedy app.get() lub app.post()
+jak to się ma do wcześniejszej funkcji get?
+
+app.route(path).VERB([callback...], callback)
+obsługa wielu VERB, np. app.route(path).get(callback).post(callback)
+
+app.param.([name], callback)
+app.param('userId', callback)
+dołączanie funkcjonalności do każdego żądania, które zawiera w ścieżce dany parametr routingu; jeśli mamy w zapytaniu parametr userId, to wykonujemy callback
+
+req.query
+obiekt, który zawiera sparsowane parametry query-string
+
+req.params
+obiekt, który zawiera sparsowane parametry zapytania
+
+req.body
+obiekt, który zawiera sparsowany request body; property zawarta również w middleware bodyParser()
+
+req.param(name)
+wartość wskazanego parametru - routing param, query-string lub property z JSON request body
+
+req.path, req.host, req.ip
+
+req.cookies
+używany z połączeniem z middleware cookieParser() do przechwycenia ciasteczek wysłanych przez user-agenta
+
+res.status(code)
+ustawienie status code odpowiedzi HTTP
+
+res.set(field, [value])
+ustawienie nagłówka HTTP
+
+res.cookie(name, value, [options])
+ustawienie ciasteczka odpowiedzi, options służy do przekazania obiektu z definicją konfiguracji ciasteczka, np. property maxAge
+
+res.redirect([status], url)
+przekierowanie żądania pod dany url, status jest domyślnie 302 Found
+
+res.send([body|status], [body])
+dla odpowiedzi non-straming, w tle są ustawiane nagłówki Content-Type i Content-Length oraz odpowiadanie z odpowiednimi nagłówkami cache
+
+res.json([body|status], [body])
+to samo co res.send() w przypadku wysyłania obiektu lub tablicy; czasami używane do wymuszenia odpowiedzi JSON do nie-obiektów takich jak null czy undefined
+
+res.render(view, [locals], callback)
+renderowanie widoku i wysłanie odpowiedzi HTML
+
+Istnieją firmowe i third-party middleware (jest repozytorium i wiki na githubie sencha)
+Morgan - logger żądań HTTP
+body-parser - body parser do parsowanie request body, obsługuje różne typy żądań
+moethod-override - wsparcie dla HTTP verb, np. PUT, DELETE - w przypadku, gdy klient ich nie wspiera
+Compression - kompresowanie response data za pomocą gzip/deflate
+express.static - serwowanie statycznych plików
+cookie-parser - parsowanie ciasteczek z req.cookies
+Session - wsparcie persistent sessions
+
+express jest pattern agnostic, nie wspiera konkretnej składni czy struktury folderów; całą aplikację można zawrzeć w jednym pliku js; MVC można uzyskać organizując odpowiednio foldery i w nich pliki js; pliki js są modułami CommonJS, które funkcjonują jako logiczne jednostki; np. foldery models, views, controllers z odpowiednimi modułami; organizacja zależy od złożoności i wielkości projektu
+
+struktura horyzontalna - mniejsze projekty
+struktura wertykalna - aplikacje bogate w funkcje
+
+struktura horyzontalna
+podział folderów ze względu na rolę funkcjonalną, a nie ze względu na implementowaną funkcję
+
+app - logika aplikacji express
+    models
+    views
+    controllers
+    routes - middleware
+config - pliki konfiguracyjne aplikacji express, przy większej ilości modułów każdy będzie miał swoją konfigurację w osobnym pliku js
+    env - pliki konfiguracyjne środowiska apikacji express
+    config.js - konfiguracja aplikacji express
+    express.js - inicjalizacja aplikacji js
+public - statyczne pliki client-side, podział folderów ze względu na separację funkcjonalną (w zgodzie z naszym MVC)
+    config - pliki konfiguracyjne aplikacji angularJs
+    controllers - kontrolery AngularJs
+    css
+    directives - dyrektywy angularJs
+    filters - filtry angularJs
+    img
+    services
+    views - widoki angularJs
+    application.js - inicjalizacja aplikacji angularJs
+server.js - główny plik aplikacji nodeJs, tu załadujemy express.js jako moduł, żeby odpalić aplikację express
+package.json
+
+struktura wertykalna
+podział folderów i plików ze wzglęzu na implementowaną funkcję; każda funkcja aplikacji ma swój folder, który zawiera strukturę folderów MVC
+
+core
+    client
+        config
+        controllers
+        css
+        directives
+        filters
+        img
+        services
+        views
+        client.application.js
+    server
+        config
+        controllers
+        models
+        routers
+        views
+
+feature
+    client
+        config
+        controllers
+        css
+        directives
+        filters
+        img
+        services
+        views
+        feature.client.module.js - inicjalizacja modułu angularJs
+    server
+        config
+            env - pliki konfiguracyjne serwera dla środowiska funkcjonalności
+            feature.server.config.js - konfiguracja funkcjonalności
+        controllers - kontrolery express funkcjonalności
+        models
+        routers - middleware
+        views
+serever.js
+package.json
+
+nazywanie plików: feature_name, execution destination, role,
+np. feature.client.controller.js i feature.server.controller.js
